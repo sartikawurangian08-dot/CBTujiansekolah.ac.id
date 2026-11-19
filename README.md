@@ -1,6 +1,5 @@
 # CBTujiansekolah.ac.id
 Sistem ini dirancang untuk membuat ujian bersama dengan siswa yang sudah disiapkan sebelumnya
-<!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
