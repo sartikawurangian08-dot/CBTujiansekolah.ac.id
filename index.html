@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0f172a">
+  <title>CBT Ujian Terpadu</title>
+  <style>
+    html, body { margin: 0; width: 100%; height: 100%; background: #f8fafc; }
+    iframe { width: 100%; height: 100%; border: 0; display: block; }
+    #loading { position: fixed; inset: 0; display: grid; place-items: center; font: 600 14px/1.4 system-ui, sans-serif; color: #475569; background: #f8fafc; }
+  </style>
+</head>
+<body>
+  <div id="loading">Memuat Sistem Ujian CBT...</div>
+  <iframe id="cbt-app" title="CBT Ujian Terpadu"></iframe>
+  <script>
+    async function loadApp() {
+      try {
+        const response = await fetch('./README.md', { cache: 'no-store' });
+        const source = await response.text();
+        const start = source.indexOf('<!DOCTYPE html>');
+        if (start === -1) throw new Error('Beranda aplikasi tidak ditemukan');
+        let html = source.slice(start);
+        html = html.replace('</head>', '<link rel="stylesheet" href="./responsive.css"></head>');
+        const frame = document.getElementById('cbt-app');
+        frame.srcdoc = html;
+        frame.onload = () => document.getElementById('loading').remove();
+      } catch (error) {
+        document.getElementById('loading').textContent = 'Gagal memuat aplikasi: ' + error.message;
+      }
+    }
+    loadApp();
+  </script>
+</body>
+</html>
